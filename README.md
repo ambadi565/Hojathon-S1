@@ -21,6 +21,7 @@
 
 RLM Inference Engine
 
+
 ### Team
 
 RTX4060
@@ -32,6 +33,8 @@ This project addresses the need for an AI system that can work over large docume
 ### Proposed Solution
 
 The project implements an agentic Recursive Language Model (RLM) harness that combines a Python backend, a FastAPI streaming API, and a React frontend. The backend runs an orchestration loop where the root model reads the user query and context, emits Python code for the REPL when needed, executes that code, and feeds the observations back into the model. Worker-model sub-calls help the system break down complex analysis tasks while the frontend streams live iteration details back to the user in real time.
+
+This project is an implementation of the Recursive Language Models research paper, ["Recursive Language Models"](https://arxiv.org/abs/2512.24601).
 
 ### Key Features
 

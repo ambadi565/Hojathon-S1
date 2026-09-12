@@ -3,3 +3,6 @@ python-dotenv
 pydantic
 pydantic-settings
 pytest
+fastapi
+uvicorn[standard]
+python-multipart

@@ -36,7 +36,14 @@ class LLMClient:
             except (errors.APIError, Exception) as err:
                 err_str = str(err)
                 code = getattr(err, "code", None)
-                if (code == 429 or "429" in err_str or "RESOURCE_EXHAUSTED" in err_str) and attempt < max_retries - 1:
+                is_rate_limited = code == 429 or "429" in err_str or "RESOURCE_EXHAUSTED" in err_str
+                is_daily_quota = "PerDay" in err_str or "daily quota" in err_str.lower()
+                if is_daily_quota:
+                    raise RuntimeError(
+                        "Gemini API daily quota exhausted for the configured model. "
+                        "Use a key with available quota or wait for the quota to reset."
+                    ) from err
+                if is_rate_limited and attempt < max_retries - 1:
                     wait_time = base_delay * (1.5 ** attempt)
                     print(
                         f"\n[Rate Limit 429] Gemini Free Tier limit reached. Waiting {wait_time:.1f}s before retry (attempt {attempt + 1}/{max_retries})...",

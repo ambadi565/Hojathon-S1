@@ -267,10 +267,11 @@ async def run_query(
     def _run():
         try:
             runner.run(prompt_text)
-        except Exception:
+        except Exception as exc:
+            traceback.print_exc()
             event_q.put({
                 "event": "error",
-                "data": {"message": traceback.format_exc()},
+                "data": {"message": str(exc)},
             })
         finally:
             event_q.put(None)  # Sentinel to end the stream

@@ -1,0 +1,5 @@
+FACT-001: The Python programming language was created by Guido van Rossum and first released in 1991.
+
+FACT-002: The Antigravity IDE is an advanced agentic coding assistant developed by Google DeepMind.
+
+This is a sample document to test the RLM CLI.

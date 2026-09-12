@@ -7,15 +7,15 @@ analysis approach.
 Usage::
 
     # 1. Set your API key:
-    export OPENAI_API_KEY="sk-..."
+    export GEMINI_API_KEY="AIzaSy..."
     # — or create a .env file in the src/ directory:
-    echo "OPENAI_API_KEY=sk-..." > src/.env
+    echo "GEMINI_API_KEY=AIzaSy..." > src/.env
 
     # 2. Run the demo:
     python src/example.py
 
-Note: This script requires a valid OpenAI API key because it makes live
-calls to ``gpt-4o`` (root) and ``gpt-4o-mini`` (worker).
+Note: This script requires a valid Gemini API key because it makes live
+calls to ``gemini-2.5-pro`` (root) and ``gemini-2.5-flash`` (worker).
 """
 
 from __future__ import annotations
@@ -135,17 +135,17 @@ def main() -> None:
     """Run the RLM demo."""
     settings = Settings()
 
-    if not settings.OPENAI_API_KEY:
+    if not settings.GEMINI_API_KEY:
         print(
             textwrap.dedent("""\
             ╔══════════════════════════════════════════════════════════════╗
-            ║  OPENAI_API_KEY is not set.                                ║
+            ║  GEMINI_API_KEY is not set.                                ║
             ║                                                            ║
             ║  Set it via environment variable:                          ║
-            ║    export OPENAI_API_KEY="sk-..."                          ║
+            ║    export GEMINI_API_KEY="AIzaSy..."                       ║
             ║                                                            ║
-            ║  Or create a .env file in the src/ directory:              ║
-            ║    echo "OPENAI_API_KEY=sk-..." > src/.env                 ║
+            ║  Or add it to your .env file in src/.env:                  ║
+            ║    GEMINI_API_KEY=AIzaSy...                                ║
             ╚══════════════════════════════════════════════════════════════╝
             """),
             file=sys.stderr,

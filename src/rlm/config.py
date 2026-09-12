@@ -8,7 +8,9 @@ from __future__ import annotations
 from pathlib import Path
 
 from dotenv import load_dotenv
-from pydantic import Field
+# pyrefly: ignore [missing-import]
+from pydantic import AliasChoices, Field
+# pyrefly: ignore [missing-import]
 from pydantic_settings import BaseSettings
 
 # Load .env from the src/ directory (or wherever the process is started)
@@ -25,14 +27,17 @@ class Settings(BaseSettings):
         MAX_ITERATIONS: Maximum number of root-model turns in a single run.
         STDOUT_TRUNCATION_LIMIT: Max characters of REPL stdout shown to the root model per turn.
         PREVIEW_LIMIT: Number of characters from the context shown as a preview in the system prompt.
-        OPENAI_API_KEY: OpenAI API key loaded from the environment.
+        GEMINI_API_KEY: Gemini API key loaded from the environment (or GOOGLE_API_KEY).
     """
 
-    ROOT_MODEL: str = "gpt-4o"
-    WORKER_MODEL: str = "gpt-4o-mini"
+    ROOT_MODEL: str = "gemini-3.6-flash"
+    WORKER_MODEL: str = "gemini-3.6-flash"
     MAX_ITERATIONS: int = 25
     STDOUT_TRUNCATION_LIMIT: int = 2000
     PREVIEW_LIMIT: int = 500
-    OPENAI_API_KEY: str = Field(default="")
+    GEMINI_API_KEY: str = Field(
+        default="",
+        validation_alias=AliasChoices("GEMINI_API_KEY", "GOOGLE_API_KEY"),
+    )
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}

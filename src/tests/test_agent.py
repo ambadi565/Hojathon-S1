@@ -31,7 +31,7 @@ def settings() -> Settings:
     """Return test settings with a low iteration cap."""
     return Settings(
         MAX_ITERATIONS=5,
-        OPENAI_API_KEY="test-key",
+        GEMINI_API_KEY="test-key",
         STDOUT_TRUNCATION_LIMIT=2000,
         PREVIEW_LIMIT=500,
     )
